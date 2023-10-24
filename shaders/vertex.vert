@@ -4,6 +4,7 @@ uniform mat4 p3d_ModelViewProjectionMatrix;
 uniform mat4 p3d_ModelViewMatrix;
 uniform vec3 lightPos;
 uniform mat4 p3d_ViewMatrix;
+uniform mat3 p3d_NormalMatrix;
 
 in vec4 p3d_Vertex;
 in vec2 p3d_MultiTexCoord0;
@@ -23,6 +24,6 @@ void main() {
     uv = p3d_MultiTexCoord0;
     data.uv = p3d_MultiTexCoord0;
     data.FragPos = vec3(p3d_ModelViewMatrix * p3d_Vertex);
-    data.normal = mat3(transpose(inverse(p3d_ModelViewMatrix))) * p3d_Normal;
+    data.normal = p3d_NormalMatrix * p3d_Normal;
     data.lightPos = vec3(p3d_ViewMatrix * vec4(lightPos, 1.0));
 }
